@@ -1,0 +1,99 @@
+class entry
+        {
+             int key;
+            string data;
+            public void hashentry(int key, string data)
+            {
+                this.key = key;
+                this.data = data;
+                
+            }
+            public int getkey()
+            {
+                return key;
+            }
+
+            public string getdata()
+            {
+                return data;
+            }
+
+            const int maxsize = 50;
+            entry[] table;
+
+
+            public void HashTable()
+            {
+                table = new entry[maxsize];
+                for (int i = 0; i < maxsize; i++)
+                {
+                    table[i] = null;
+                }
+
+            }
+            private bool EmptySpace()
+            {
+                bool Open = false;
+                for (int i = 0; i < maxsize; i++)
+                {
+                    if (table[i] == null)
+                    {
+                        Open = true;
+                    }
+                }
+                return Open;
+            }
+            public void add(int key, string data)
+            {
+                if (!EmptySpace())
+                {
+                    Console.WriteLine("The hashtable is full");
+                    return ;
+                }
+                int hash = (key % maxsize);
+                while (table[hash] != null )
+                {
+                    hash = (hash + 1) % maxsize;
+                }
+                table[hash] =  data;
+            }
+
+            public bool remove(int key)
+            {
+                int hash = key % maxsize;
+                while (table[hash] != null )
+                {
+                    hash = (hash + 1) % maxsize;
+                }
+                if (table[hash] == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    table[hash] = null;
+                    return true;
+                }
+            }
+
+            public void showvalues()
+            {
+                for (int i = 0; i < maxsize; i++)
+                {
+                    if (table[i] == null && i <= maxsize)
+                    {
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("{0}", table[i].getdata());
+                    }
+                }
+
+            }
+
+        }
+
+        
+    }
+
